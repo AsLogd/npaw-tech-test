@@ -12,8 +12,9 @@
     "notify-update": "notify -t 'NPAW' -m 'Build has been updated!' -s",
     "dist": "eslint app && make dist",
     "build": "eslint app && make build",
-    "watch": "npm run build && npm-run-all -p watch:*",
-    "watch:components": "chokidar \"app/initialize.js\" \"app/components/*.js\" -c \"make scripts-dev && npm run notify-update\"",
+    "serve": "http-server build",
+    "watch": "npm run build && npm-run-all -p watch:* serve",
+    "watch:components": "chokidar \"app/templates/*.jst\" \"app/initialize.js\" \"app/components/**/*.js\" -c \"make scripts-dev && npm run notify-update\"",
     "watch:styles": "chokidar \"app/styles/*.less\" -c \"make styles && npm run notify-update\"",
     "watch:assets": "chokidar \"assets\" -c \"make assets && npm run notify-update\"",
     "test": "echo test"
