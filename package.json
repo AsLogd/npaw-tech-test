@@ -14,9 +14,9 @@
     "build": "eslint app && make build",
     "serve": "http-server build",
     "watch": "npm run build && npm-run-all -p watch:* serve",
-    "watch:components": "chokidar \"app/templates/*.jst\" \"app/initialize.js\" \"app/components/**/*.js\" -c \"make scripts-dev && npm run notify-update\"",
+    "watch:components": "chokidar \"app/templates/*.jst\" \"app/initialize.js\" \"app/components/**/*.js\" -c \"eslint app && make scripts-dev && npm run notify-update\"",
     "watch:styles": "chokidar \"app/styles/*.less\" -c \"make styles && npm run notify-update\"",
-    "watch:assets": "chokidar \"assets\" -c \"make assets && npm run notify-update\"",
+    "watch:assets": "chokidar \"app/assets/**/*\" -c \"make assets && npm run notify-update\"",
     "test": "echo test"
   },
   "dependencies": {
