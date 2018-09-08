@@ -1,0 +1,41 @@
+{
+  "name": "npaw_test",
+  "description": "An iTunes search",
+  "author": "aslogd",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "make start",
+    "notify-update": "notify -t 'NPAW' -m 'Build has been updated!' -s",
+    "dist": "eslint app && make dist",
+    "build": "eslint app && make build",
+    "watch": "npm run build && npm-run-all -p watch:*",
+    "watch:components": "chokidar \"app/initialize.js\" \"app/components/*.js\" -c \"make scripts-dev && npm run notify-update\"",
+    "watch:styles": "chokidar \"app/styles/*.less\" -c \"make styles && npm run notify-update\"",
+    "watch:assets": "chokidar \"assets\" -c \"make assets && npm run notify-update\"",
+    "test": "echo test"
+  },
+  "dependencies": {
+    "backbone": "~1.3.3",
+    "backbone.marionette": "~3.0.0",
+    "chokidar-cli": "^1.2.1",
+    "jquery": "~1.12.2",
+    "less": "^3.8.1",
+    "npm-run-all": "^4.1.3",
+    "uglify": "^0.1.5",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "eslint": "^2.11.1",
+    "http-server": "^0.9.0",
+    "jstify": "^0.14.0",
+    "node-notifier-cli": "^1.1.2",
+    "node-underscorify": "0.0.14"
+  }
+}
