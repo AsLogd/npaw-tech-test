@@ -7,7 +7,9 @@ export default Marionette.View.extend({
 		search: '#search-bar',
 		results: '#results'
 	},
-	onChildviewSubmitQuery(asdf) {
-		this.getChildView('results').fetchResults()
+	onChildviewSubmitQuery() {
+		this.getChildView('results').fetchResults(
+			this.getChildView('search').getQuery()
+		)
 	}
 });

@@ -10,5 +10,8 @@ export default Marionette.View.extend({
 	},
 	triggers: {
 		'click @ui.submit': 'submit:query'
+	},
+	getQuery() {
+		return this.getUI('input').val()
 	}
 });

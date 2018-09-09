@@ -7,10 +7,10 @@ export default Marionette.CollectionView.extend({
 	tagName: 'ul',
 	collection: AlbumListCollection,
 	childView: AlbumView,
-	fetchResults() {
+	fetchResults(query) {
 		this.collection.fetch({
 			data: {
-				term: 'jamiroquai',
+				term: query,
 				media: 'music',
 				entity: 'album'
 			}
