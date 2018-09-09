@@ -61,6 +61,9 @@ export default Marionette.CollectionView.extend({
 	updatePager() {
 		let pagerElement = this.getUI('pager')
 		pagerElement.html('')
+		if (this.totalElements === 0) {
+			return;
+		}
 		//TODO: we can probably use a template here
 		let pagerHTML = ''
 		pagerHTML += '<div '
