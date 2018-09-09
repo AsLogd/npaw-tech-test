@@ -5,9 +5,7 @@ import AlbumListCollection from '../collections/AlbumListCollection'
 import albumTmpt from '../../templates/album.jst'
 
 export default PagedCollectionView.extend({
-	tagName: 'div',
 	childView: AlbumView,
-	collection: AlbumListCollection,
 	elementsPerPage: 20,
 	fetchResults(query) {
 		this.collection.fetch({

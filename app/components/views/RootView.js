@@ -7,7 +7,10 @@ export default Marionette.View.extend({
 		search: '#search-bar',
 		results: '#results'
 	},
-	onChildviewSubmitQuery() {
+	childViewEvents: {
+		'submit:query': 'submitQuery'
+	},
+	submitQuery() {
 		this.getChildView('results').fetchResults(
 			this.getChildView('search').getQuery()
 		)

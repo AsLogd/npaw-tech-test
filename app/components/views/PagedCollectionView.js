@@ -1,16 +1,17 @@
 import {Marionette} from '../../../vendor/vendor'
 import pagedViewTmpt from '../../templates/pagedView.jst'
 
-import AlbumView from './AlbumView'
 /*
 	A view that enables paging a collection.
 	The collection and the childView have to be provided
+	Extend:
+	-collection
+	-childView
+	-elementsPerPage (default 10)
 */
 export default Marionette.CollectionView.extend({
 	tagName: 'div',
 	childViewContainer: 'ul',
-	//TODO: abstract this class
-	childView: AlbumView,
 	template: pagedViewTmpt,
 	elementsPerPage: 10,
 	page: 0,
@@ -28,8 +29,7 @@ export default Marionette.CollectionView.extend({
 		'click @ui.pagePrevButton': 'prevPage'
 	},
 	initialize() {
-		this.collectionChange();
-		//this.listenTo(this.collection, 'add remove reset update', this.collectionChange)
+		this.listenTo(this.collection, 'reset update', this.collectionChange)
 	},
 	/* Class Events */
 	onRender() {
@@ -85,6 +85,7 @@ export default Marionette.CollectionView.extend({
 	collectionChange() {
 		this.totalElements = this.collection.length
 		this.totalPages = this.totalElements / this.elementsPerPage
+		this.updatePager()
 	},
 	viewFilter(view, index, collection) {
 		return index >= this.elementsPerPage * this.page &&
