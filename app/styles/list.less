@@ -1,3 +1,35 @@
 #album-list{
-	padding:50px 0;
+	padding-top:50px;
+	ul{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		max-width:1330px;
+		margin: 30px auto;
+		padding: 0;
+		list-style: none;
+		li{
+			flex: 0 0 auto;
+			width:300px;
+			text-align:center;
+			img{
+				width:65%;
+			}
+			h1{
+				font-size:28px;
+				color:#333;
+				margin:10px 0;
+				overflow:hidden;
+				white-space: nowrap;
+				text-overflow:ellipsis;
+			}
+			h2{
+				margin-top:0;
+				margin-bottom:30px;
+				font-size:24px;
+				color:#666;
+				font-weight: lighter;
+			}
+		}
+	}
 }
