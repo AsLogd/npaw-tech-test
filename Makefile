@@ -5,6 +5,9 @@ MODULESDIR = ./node_modules/.bin
 styles: 
 	$(MODULESDIR)/lessc app/styles/app.less $(BUILDDIR)/css/app.css
 
+styles-dist: 
+	$(MODULESDIR)/lessc app/styles/app.less $(DISTDIR)/css/app.css
+
 scripts-dev: 
 	$(MODULESDIR)/browserify app/initialize.js \
 	-t node-underscorify \
@@ -23,6 +26,8 @@ scripts:
 assets: 
 	@cp -Rf app/assets/* $(BUILDDIR)/
 
+assets-dist: 
+	@cp -Rf app/assets/* $(DISTDIR)/
 
 pre-build:
 	@mkdir -p $(BUILDDIR)/js
@@ -37,7 +42,7 @@ pre-dist:
 post-dist:
 	rm -Rf temp
 
-dist: pre-dist assets styles scripts post-dist
+dist: pre-dist assets-dist styles-dist scripts post-dist
 
 
 server:
