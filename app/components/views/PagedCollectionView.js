@@ -18,16 +18,21 @@ export default Marionette.CollectionView.extend({
 	page: 0,
 	totalElements: 0,
 	totalPages: 0,
+	listLayout: false,
 	ui: {
 		pager: '.pager',
 		pageNumButton: '.pager div[data-page]',
 		pageNextButton: '.pager div[data-next-page]',
 		pagePrevButton: '.pager div[data-prev-page]',
+		changeLayout: '.change-layout',
+		changeLayoutBtn: '.change-layout .button',
+		list: 'ul',
 	},
 	events: {
 		'click @ui.pageNumButton': 'handlePagerChange',
 		'click @ui.pageNextButton': 'nextPage',
-		'click @ui.pagePrevButton': 'prevPage'
+		'click @ui.pagePrevButton': 'prevPage',
+		'click @ui.changeLayoutBtn': 'handleChangeLayout'
 	},
 	initialize() {
 		this.listenTo(this.collection, 'reset update', this.collectionChange)
@@ -35,10 +40,18 @@ export default Marionette.CollectionView.extend({
 	/* Class Events */
 	onRender() {
 		this.updatePager()
+		if (this.totalElements > 0) {
+			this.showLayoutControl()
+		}
+		this.updateLayout()
 	},
 	/* Event handlers */
 	handlePagerChange(event) {
 		this.changePage(event.target.dataset.page)
+	},
+	handleChangeLayout(event) {
+		this.listLayout = !this.listLayout
+		this.updateLayout()
 	},
 	nextPage() {
 		let next = this.page + 1
@@ -58,6 +71,15 @@ export default Marionette.CollectionView.extend({
 			this.render()
 			this.$el.fadeTo(200, 1)
 		})
+	},
+	updateLayout() {
+		if (this.listLayout) {
+			this.getUI('changeLayoutBtn')[0].classList.add('active')
+			this.getUI('list')[0].classList.add('list-layout')
+		} else {
+			this.getUI('changeLayoutBtn')[0].classList.remove('active')
+			this.getUI('list')[0].classList.remove('list-layout')
+		}
 	},
 	updatePager() {
 		let pagerElement = this.getUI('pager')
@@ -86,11 +108,18 @@ export default Marionette.CollectionView.extend({
 		pagerHTML += ' data-next-page="true">&gt;</div>'
 		pagerElement.html(pagerHTML)
 	},
+	showLayoutControl() {
+		this.getUI('changeLayout')[0].style.opacity = 1
+	},
 	collectionChange() {
 		this.page = 0
 		this.totalElements = this.collection.length
 		this.totalPages = Math.ceil(this.totalElements / this.elementsPerPage)
 		this.updatePager()
+		if (this.totalElements > 0) {
+			this.showLayoutControl()
+		}
+		this.updateLayout()
 	},
 	viewFilter(view, index, collection) {
 		return index >= this.elementsPerPage * this.page &&

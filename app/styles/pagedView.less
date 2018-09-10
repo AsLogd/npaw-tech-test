@@ -26,4 +26,37 @@
 			}
 		}
 	}
+	.change-layout{
+		position:absolute;
+		display:flex;
+		right:15%;
+		top:50px;
+		opacity:0;
+		.button{
+			width:50px;
+			height:25px;
+			background-color:#e0e0e0;
+			border-radius:15px;
+			margin: -3px 10px;
+			transition: background 200ms;
+			cursor:pointer;
+			&::before{
+				content: '';
+				position:absolute;
+				width:22px;
+				height:22px;
+				background-color:#adadad;
+				z-index:1;
+				border-radius:24px;
+				margin:2px;
+				transition: margin 200ms;
+			}
+			&.active{
+				background-color:#8fce7f;
+				&::before{
+					margin-left:26px;
+				}
+			}
+		}
+	}
 }
