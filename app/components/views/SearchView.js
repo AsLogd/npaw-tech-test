@@ -5,7 +5,8 @@ import searchTmpt from '../../templates/search.jst';
 export default Marionette.View.extend({
 	template: searchTmpt,
 	ui: {
-		input: '#search-input'
+		input: '#search-input',
+		logo: '#npaw-logo'
 	},
 	events: {
 		'input @ui.input': 'handleInputChange'
@@ -24,5 +25,8 @@ export default Marionette.View.extend({
 	},
 	getQuery() {
 		return this.getUI('input').val()
+	},
+	compactView() {
+		this.$el[0].classList.add('compact')
 	}
 });
