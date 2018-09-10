@@ -62,7 +62,7 @@ export default Marionette.CollectionView.extend({
 	updatePager() {
 		let pagerElement = this.getUI('pager')
 		pagerElement.html('')
-		if (this.totalElements === 0) {
+		if (this.totalPages < 2) {
 			return;
 		}
 		//TODO: we can probably use a template here
@@ -87,6 +87,7 @@ export default Marionette.CollectionView.extend({
 		pagerElement.html(pagerHTML)
 	},
 	collectionChange() {
+		this.page = 0
 		this.totalElements = this.collection.length
 		this.totalPages = Math.ceil(this.totalElements / this.elementsPerPage)
 		this.updatePager()
