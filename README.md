@@ -11,5 +11,5 @@ DISCLAIMER: This was based on the browserify skeleton provided by the Marionette
     * Inside this folder run: `npm install`
 * Run:
     * `npm start` — starts project
-    * `npm run build-dev` - builds you project for development
+    * `npm run build` - builds you project for development
     * `npm run dist` - builds you project for production
