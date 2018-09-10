@@ -1,0 +1,29 @@
+.pagedView{
+	.pager{
+		display: flex;
+		justify-content:center;
+		div{
+			margin:0 10px;
+			cursor:pointer;
+			&[data-prev-page], &[data-next-page]{
+				font-weight: bolder;
+				&.disabled{
+					opacity:0.1;
+					cursor: default;
+				}
+			}
+			&[data-page]{
+				margin-top:3px;
+				width:10px;
+				height:10px;
+				background-color:#ccc;
+				border:thin solid #aaa;
+				border-radius:10px;
+				&.active{
+					background-color:#333;
+					box-shadow: 0 0 5px 0 #333;
+				}
+			}
+		}
+	}
+}

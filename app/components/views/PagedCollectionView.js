@@ -11,6 +11,7 @@ import pagedViewTmpt from '../../templates/pagedView.jst'
 */
 export default Marionette.CollectionView.extend({
 	tagName: 'div',
+	className: 'pagedView',
 	childViewContainer: 'ul',
 	template: pagedViewTmpt,
 	elementsPerPage: 10,
@@ -67,19 +68,19 @@ export default Marionette.CollectionView.extend({
 		//TODO: we can probably use a template here
 		let pagerHTML = ''
 		pagerHTML += '<div '
-		if (this.npage === 0) {
+		if (this.page === 0) {
 			pagerHTML += 'class="disabled"'
 		}
 		pagerHTML += ' data-prev-page="true">&lt;</div>'
 		for (let i = 0; i < this.totalPages; i++) {
 			pagerHTML += '<div '
-			if (this.npage === i) {
+			if (this.page === i) {
 				pagerHTML += 'class="active"'
 			}
-			pagerHTML += ' data-page="' + i + '">+</div>'
+			pagerHTML += ' data-page="' + i + '"></div>'
 		}
 		pagerHTML += '<div '
-		if (this.npage === this.totalPages) {
+		if (this.page === this.totalPages - 1) {
 			pagerHTML += 'class="disabled"'
 		}
 		pagerHTML += ' data-next-page="true">&gt;</div>'
@@ -87,7 +88,7 @@ export default Marionette.CollectionView.extend({
 	},
 	collectionChange() {
 		this.totalElements = this.collection.length
-		this.totalPages = this.totalElements / this.elementsPerPage
+		this.totalPages = Math.ceil(this.totalElements / this.elementsPerPage)
 		this.updatePager()
 	},
 	viewFilter(view, index, collection) {
