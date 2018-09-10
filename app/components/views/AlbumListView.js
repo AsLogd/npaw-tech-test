@@ -14,7 +14,7 @@ export default PagedCollectionView.extend({
 				term: query,
 				media: 'music',
 				entity: 'album',
-				//limit: 200
+				limit: 200
 			}
 		})
 	}
